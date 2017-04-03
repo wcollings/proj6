@@ -1,4 +1,4 @@
 public class item{
-	String list;
-	int qnty;
+	public String list, notes;
+	public int qnty;
 }
