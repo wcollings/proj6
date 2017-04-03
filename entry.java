@@ -1,6 +1,9 @@
+package inventory;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import item.java;
 public class entry{
+	item[] list=new item[200];
 	public string name, number, notes;
 	public static void readInventory(string filename) throws exception
 	{
