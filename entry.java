@@ -1,24 +1,42 @@
 package inventory;
 
+import java.util.Formatter;
 import java.util.Scanner;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import item.java;
+import java.io.*;
 public class entry{
-	public static item[] list=new item[200];
+	public static item[] entryList=new item[200];
 	public static int n=0;
 
 	public static void main(String[] args) {
-		String selector;
+		String selector, name;
 		Scanner stdin=new Scanner(System.in);
+		String file="database.txt";
+		readIn(file);
 		System.out.print("Command: ");
-		selector=stdin.next;
-		selector=tolowercase(selector);
+		selector=stdin.next();
+		name=stdin.next();
+		selector=selector.toLowerCase();
 		switch(selector)
 		{
-			case 'e':
+			case "e": enter(name);
 		}
 
+	}
+
+	public static void readIn(String filename)
+	{
+		try {
+			Scanner in=new Scanner(new File(filename));
+			while (in.hasNext())
+			{
+				entryList[n].name=in.next();
+				entryList[n].qnty=in.nextInt();
+				entryList[n].notes=in.next();
+				n++;
+			}
+
+			} catch(Exception e) {};
+		System.out.print("Read database successfully\n");
 	}
 
 	public static void enter(String name)
@@ -30,30 +48,25 @@ public class entry{
 		qty=stdin.nextInt();
 		System.out.printf("Enter notes: ");
 		notes=stdin.next();
-		index=find(name); //find is being worked on
+		index=2; //find is being worked on
 		if (index != -1) //found entry
 		{
-			list[index].number+=qty;
+			entryList[index].qnty+=qty;
 		}
 		else
 		{
-			list[++n].name=name;
-			list[n].number=qty;
-			list[n].notes=notes;
-
+			entryList[++n].name=name;
+			entryList[n].qnty=qty;
+			entryList[n].notes=notes;
 		}
 	}
 
 	public static void WriteInventory(String FileName) throws Exception{
-		PrintStream P  = new PrintStream(FileName);
-							
-		for (int i=0; i < num_entries; i++) {
-			P.println(entryList[i].name      + "\t" +
-					entryList[i].quantity  + "\t" +
-					entryList[i].notes);
+		Formatter out=new Formatter(FileName);
+		for (int x=0; x < n; ++x)
+		{
+			out.format("%s %d %s%n", entryList[x].name, entryList[x].qnty, entryList[x].notes);
 		}
-		P.close();
-		System.out.println("Inventory stored.");		
 }
 	
 }

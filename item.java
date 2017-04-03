@@ -1,4 +1,5 @@
+package inventory;
 public class item{
-	public String list, notes;
+	public String name, notes;
 	public int qnty;
 }
