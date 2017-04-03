@@ -7,6 +7,7 @@ public class entry{
 	public string name, number, notes;
 	public static void readInventory(string filename) throws exception
 	{
+		
 		FileReader fr=new fileReader(filename);
 		BufferedReader text=new BufferedReader(fr);
 
