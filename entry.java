@@ -25,7 +25,6 @@ public class entry{
 
 	public static void readIn(String filename)
 	{
-<<<<<<< HEAD
 		try {
 			Scanner in=new Scanner(new File(filename));
 			while (in.hasNext())
@@ -35,11 +34,9 @@ public class entry{
 				entryList[n].notes=in.next();
 				n++;
 			}
-=======
 		
 		FileReader fr=new fileReader(filename);
 		BufferedReader text=new BufferedReader(fr);
->>>>>>> 6ad9afeedffb2320176035372a3648b7ef226184
 
 			} catch(Exception e) {};
 		System.out.print("Read database successfully\n");
@@ -74,9 +71,4 @@ public class entry{
 			out.format("%s %d %s%n", entryList[x].name, entryList[x].qnty, entryList[x].notes);
 		}
 }
-	
-<<<<<<< HEAD
-=======
-
->>>>>>> 6ad9afeedffb2320176035372a3648b7ef226184
 }
