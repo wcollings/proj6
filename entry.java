@@ -2,7 +2,9 @@ package inventory;
 
 import java.util.Formatter;
 import java.util.Scanner;
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 public class entry{
 	public static item[] entryList=new item[200];
 	public static int n=0;
@@ -10,7 +12,7 @@ public class entry{
 	public static void main(String[] args) {
 		String selector, name;
 		Scanner stdin=new Scanner(System.in);
-		String file="database.txt";
+		String file="/home/wmc/Documents/code/java/project6/database.txt";
 		readIn(file);
 		System.out.print("Command: ");
 		selector=stdin.next();
@@ -23,23 +25,23 @@ public class entry{
 
 	}
 
-	public static void readIn(String filename)
-	{
-		try {
-			Scanner in=new Scanner(new File(filename));
-			while (in.hasNext())
+	public static void readIn(String filename){
+		try 
+		{
+			FileReader fr=new FileReader(filename);
+			BufferedReader br= new BufferedReader(fr);
+			String[] lines=new String[200];
+			for (int i;i<200;++i)
 			{
-				entryList[n].name=in.next();
-				entryList[n].qnty=in.nextInt();
-				entryList[n].notes=in.next();
-				n++;
+				lines[i]=br.readLine();
+				System.out.println(lines[i]);
 			}
-		
-		FileReader fr=new FileReader(filename);
-		BufferedReader text=new BufferedReader(fr);
-
-			} catch(Exception e) {};
-		System.out.print("Read database successfully\n");
+			br.close();
+			return;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 	}
 
 	public static void enter(String name)
@@ -51,17 +53,18 @@ public class entry{
 		qty=stdin.nextInt();
 		System.out.printf("Enter notes: ");
 		notes=stdin.next();
-		index=2; //find is being worked on
+		index=find(name);
 		if (index != -1) //found entry
 		{
-			entryList[index].qnty+=qty;
+			entryList[index].qnty=qty;
 		}
 		else
 		{
 			entryList[++n].name=name;
-			entryList[n].qnty=qty;
+			entryList[n].qnty+=qty;
 			entryList[n].notes=notes;
 		}
+		return;
 	}
 
 	public static void WriteInventory(String FileName) throws Exception{
@@ -70,5 +73,10 @@ public class entry{
 		{
 			out.format("%s %d %s%n", entryList[x].name, entryList[x].qnty, entryList[x].notes);
 		}
-}
+	}
+
+	public static int find(String to_Search) //just a placeholder. Delete when the real one exists
+	{
+		return 2;
+	}
 }
