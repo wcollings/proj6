@@ -35,7 +35,7 @@ public class entry{
 				n++;
 			}
 		
-		FileReader fr=new fileReader(filename);
+		FileReader fr=new FileReader(filename);
 		BufferedReader text=new BufferedReader(fr);
 
 			} catch(Exception e) {};
