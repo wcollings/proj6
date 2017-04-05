@@ -77,6 +77,18 @@ public class entry{
 
 	public static int find(String to_Search) //just a placeholder. Delete when the real one exists
 	{
-		return 2;
+		for (i = 0; i < n){
+		if to_Search == entryList[i].name{
+		return i;}
+		}
+		return -9;
 	}
+}
+	public static void list()
+	{ 
+		for (i = 0; i < n)
+			print(i);
+	}
+public static void print(int flamingo)
+{ system.out.println(entryList[flamingo].name + entryList[flamingo].qnty + entryList[flamingo].notes);
 }
