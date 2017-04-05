@@ -31,7 +31,7 @@ public class entry{
 			FileReader fr=new FileReader(filename);
 			BufferedReader br= new BufferedReader(fr);
 			String[] lines=new String[200];
-			for (int i;i<200;++i)
+			for (int i=0;i<200;++i)
 			{
 				lines[i]=br.readLine();
 				System.out.println(lines[i]);
@@ -77,18 +77,19 @@ public class entry{
 
 	public static int find(String to_Search) //just a placeholder. Delete when the real one exists
 	{
-		for (i = 0; i < n){
-		if to_Search == entryList[i].name{
+		for (int i = 0; i < n;++i){
+		if (to_Search.equals(entryList[i].name)){
 		return i;}
 		}
 		return -9;
 	}
-}
 	public static void list()
 	{ 
-		for (i = 0; i < n)
+		for (int i = 0; i < n; i++)
 			print(i);
 	}
 public static void print(int flamingo)
-{ system.out.println(entryList[flamingo].name + entryList[flamingo].qnty + entryList[flamingo].notes);
+{ System.out.println(entryList[flamingo].name + entryList[flamingo].qnty + entryList[flamingo].notes);
+}
+
 }
