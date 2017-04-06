@@ -1,4 +1,4 @@
-entry.class:entry.java item.java
+all:
 	javac entry.java item.java -d .
 
 run:
