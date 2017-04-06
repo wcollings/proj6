@@ -1,2 +1,7 @@
-milk 4 note
-veggie 12 burger
+milk
+4
+note
+
+veggie
+12
+burger

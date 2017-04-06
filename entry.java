@@ -21,6 +21,9 @@ public class entry{
 		switch(selector)
 		{
 			case "e": enter(name);
+				break;
+			case "f": print(find(name));
+				break;
 		}
 
 	}
@@ -33,8 +36,16 @@ public class entry{
 			String[] lines=new String[200];
 			for (int i=0;i<200;++i)
 			{
-				lines[i]=br.readLine();
+				lines[i]=br.readLine()+ " ";
+				lines[i]+=br.readLine()+ " ";
+				lines[i]+=br.readLine();
+				if (lines[i]==null)
+				{
+					break;
+				}
 				System.out.println(lines[i]);
+				process(lines[i], i);
+				lines[i]=br.readLine();
 			}
 			br.close();
 			return;	
@@ -54,7 +65,7 @@ public class entry{
 		System.out.printf("Enter notes: ");
 		notes=stdin.next();
 		index=find(name);
-		if (index != -1) //found entry
+		if (index != -9) //found entry
 		{
 			entryList[index].qnty=qty;
 		}
@@ -90,6 +101,20 @@ public class entry{
 	}
 public static void print(int flamingo)
 { System.out.println(entryList[flamingo].name + entryList[flamingo].qnty + entryList[flamingo].notes);
+}
+
+public static void process (String line, int place)
+{
+	int where, where2;
+	where2=line.indexOf(" ");
+	System.out.println(line);
+	entryList[place].name=line.substring(0,where2);
+	where=where2;
+	where2=line.indexOf(" ", where+1);
+	entryList[place].qnty=Integer.parseInt(line.substring(where, where2));
+	where=where2;
+	where2=line.indexOf(" ", where+1);
+	entryList[place].notes=line.substring(where, where2);
 }
 
 }
