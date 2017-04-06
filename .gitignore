@@ -1,3 +1,5 @@
 /.vscode
 entry.class
 item.class
+/inventory
+makefile

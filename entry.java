@@ -14,7 +14,7 @@ public class entry{
 		Scanner stdin=new Scanner(System.in);
 		String file="/home/wmc/Documents/code/java/project6/database.txt";
 		readIn(file);
-		System.out.print("Command: ");
+		/*System.out.print("Command: ");
 		selector=stdin.next();
 		name=stdin.next();
 		selector=selector.toLowerCase();
@@ -25,7 +25,7 @@ public class entry{
 			case "f": print(find(name));
 				break;
 		}
-
+*/
 	}
 
 	public static void readIn(String filename){
@@ -34,7 +34,7 @@ public class entry{
 			FileReader fr=new FileReader(filename);
 			BufferedReader br= new BufferedReader(fr);
 			String[] lines=new String[200];
-			for (int i=0;i<200;++i)
+			for (int i=0;i<2;++i)
 			{
 				lines[i]=br.readLine()+ " ";
 				lines[i]+=br.readLine()+ " ";
@@ -43,7 +43,6 @@ public class entry{
 				{
 					break;
 				}
-				System.out.println(lines[i]);
 				process(lines[i], i);
 				lines[i]=br.readLine();
 			}
@@ -51,6 +50,7 @@ public class entry{
 			return;	
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 			
 	}
@@ -105,16 +105,23 @@ public static void print(int flamingo)
 
 public static void process (String line, int place)
 {
+	System.out.println(place);
+	try {
 	int where, where2;
 	where2=line.indexOf(" ");
-	System.out.println(line);
-	entryList[place].name=line.substring(0,where2);
+	System.out.println(line.substring(0, where2));
+	System.out.println(entryList[place].name);
+	//entryList[place].name=line.substring(0, where2);
 	where=where2;
 	where2=line.indexOf(" ", where+1);
-	entryList[place].qnty=Integer.parseInt(line.substring(where, where2));
+	//entryList[place].qnty=Integer.parseInt(line.substring(where+1, where2));
+	System.out.println(line.substring(where+1, where2));
 	where=where2;
-	where2=line.indexOf(" ", where+1);
-	entryList[place].notes=line.substring(where, where2);
+	System.out.println(line.substring(where+1));
+	//entryList[place].notes=line.substring(where+1);
+	} catch (NullPointerException e) {
+		System.out.println("?????\nGood job\n");
+	}
 }
 
 }
