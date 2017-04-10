@@ -3,7 +3,9 @@ package inventory;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.BufferedReader;
 public class entry{
 	public static item[] entryList=new item[200];
@@ -18,7 +20,7 @@ public class entry{
 		System.out.print("Command: ");
 		selector=stdin.next();
 		selector=selector.toLowerCase();
-		loop: for (;;) {
+		dance: for (;;) {
 			switch(selector)
 			{
 				case "e":{
@@ -34,13 +36,17 @@ public class entry{
 					break;
 				case "l": list();
 					break;
-				case "q": break loop;
+				case "q": break dance; //YEAH!
 			}
 		System.out.print("Command: ");
 		selector=stdin.next();
 		selector=selector.toLowerCase();
 	}
+		try{
 		WriteInventory(file);
+	} catch (Exception e) {
+		System.err.println(e);
+	}
 		System.out.println("Thanks for using this system!");
 	}
 
@@ -95,17 +101,16 @@ public class entry{
 		return;
 	}
 
-	public static void WriteInventory(String FileName){
-		try {
-		Formatter out=new Formatter(FileName);
-		out.format("%s%n%d%n%s", entryList[0].name, entryList[0].qnty, entryList[0].notes);
-		for (int x=1; x < n; ++x)
-		{
-			out.format("%n%n%s%n%d%n%s", entryList[x].name, entryList[x].qnty, entryList[x].notes);
-		}
-	} catch (Exception e) {
+	public static void WriteInventory(String FileName) throws Exception{
+	FileWriter fw=new FileWriter(FileName);
+	output=new BufferedWriter(fw);
+
+	for (int i=0; i < num_entries; i++) {
+
 	}
-	}
+	P.close();
+
+}
 
 	public static int find(String to_Search)
 	{
