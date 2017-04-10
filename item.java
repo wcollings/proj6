@@ -6,6 +6,6 @@ public class item{
 	{
 		name="bad";
 		notes="dumb";
-		qnty=0;
+		qnty=-12;
 	}
 }

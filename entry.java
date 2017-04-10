@@ -5,12 +5,12 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import java.io.BufferedReader;
 public class entry{
 	public static item[] entryList=new item[200];
 	public static int n=0;
-
+ 
 	public static void main(String[] args) {
 		String selector, name;
 		instantiate();
@@ -102,14 +102,15 @@ public class entry{
 	}
 
 	public static void WriteInventory(String FileName) throws Exception{
-	FileWriter fw=new FileWriter(FileName);
-	output=new BufferedWriter(fw);
-
-	for (int i=0; i < num_entries; i++) {
-
-	}
-	P.close();
-
+   PrintStream P  = new PrintStream(FileName);
+		 			
+   for (int i=0; i < n; i++) {
+	P.println(entryList[i].name      + "\t" +
+	          entryList[i].qnty  + "\t" +
+		    entryList[i].notes);
+   }
+   P.close();
+   System.out.println("Inventory stored.");	
 }
 
 	public static int find(String to_Search)
