@@ -18,7 +18,8 @@ public class entry{
 		System.out.print("What's the database file? : ");
 		String file=stdin.next();
 		readIn(file);
-		System.out.print("\033[1mCommand: ");
+		System.out.prinln("\(Type h for help\)");
+		System.out.print("Command: ");
 		selector=stdin.next();
 		selector=selector.toLowerCase();
 		dance: for (;;) {
@@ -174,4 +175,11 @@ public static void remove(String name) /*removes an object if it exists*/
 	}
 	else System.out.println("Couldn't find item");
 }
+	public static void help()
+	{
+		System.out.println("e <item name>: enters item information. Updates the object if it already exists.");
+		System.out.rpintln("f <item name>: searches through the database, prints out the item and all associated information if it extists.");
+		System.out.println("l: lists all entries");
+		System.out.println("r <itemname>: removes item from the database if it exists");
+	}
 }
