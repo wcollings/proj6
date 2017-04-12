@@ -1,0 +1,5 @@
+breakfast 4  don't eat this
+lunch 2  it's a good meal, ok?
+dinner 4  just skip it.
+milk 24  we have a lot of this
+test 45 why do we have this many?
