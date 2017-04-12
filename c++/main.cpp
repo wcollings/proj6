@@ -19,6 +19,17 @@ void print_all(info i) {
 	cout <<entry.size() <<" entries: \n"
 	<<i.name <<"\n\t" <<i.qnty <<"\n\t" <<i.notes <<endl;
 };
+bool remove(string name)
+{
+	std::vector<info>::iterator place=find_if(entry.begin(), entry.end(), [name] (info test) {return test.name.compare(name) ==0 ? true: false;});
+	if (place != entry.end())
+	{
+		swap(place, entry.end());
+		entry.pop_back();
+		return true;
+	}
+	return false;
+}
 void enter(string temp_name)
 {
 	int temp_qnty;
@@ -95,6 +106,11 @@ int main()
 				break;
 			case 'l': for_each(entry.begin(), entry.end(), print_all);
 				break;
+			case 'r':
+			{
+				cin >>descriptor;
+				cout <<remove(descriptor)? "entry removed\n" : "could not find\n";
+			}
 			case 'q':
 			default: goto out;
 		}
