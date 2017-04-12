@@ -15,7 +15,8 @@ public class entry{
 		String selector, name;
 		instantiate();
 		Scanner stdin=new Scanner(System.in);
-		String file="/home/wmc/Documents/code/java/project6/database.txt";
+		System.out.print("What's the database file? : ");
+		String file=stdin.next();
 		readIn(file);
 		System.out.print("\033[1mCommand: ");
 		selector=stdin.next();
