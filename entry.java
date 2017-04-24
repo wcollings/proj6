@@ -1,3 +1,12 @@
+/*
+Will Collings, Sam Bowman
+Apr 11, 2017
+Project 6
+EECS 1500 section 1
+expected inputs: keyboard, database.txt file in root folder
+outputs: terminal
+approx. 5 hours? to write
+*/
 package inventory;
 
 import java.util.Formatter;
@@ -15,24 +24,24 @@ public class entry{
 		String selector, name;
 		instantiate();
 		Scanner stdin=new Scanner(System.in);
-		System.out.print("What's the database file? : ");
-		String file=stdin.next();
+		String file="database.txt";
 		readIn(file);
-		System.out.prinln("\(Type h for help\)");
 		System.out.print("Command: ");
 		selector=stdin.next();
 		selector=selector.toLowerCase();
-		dance: for (;;) {
+		loop: for (;;) {
 			switch(selector)
 			{
 				case "e":{
 					name=stdin.next();
+					name=name.toLowerCase();
 					enter(name);
 					}
 					break;
 				case "f":
 				{
 					name=stdin.next();
+					name=name.toLowerCase();
 					print(find(name));
 				}
 					break;
@@ -41,11 +50,12 @@ public class entry{
 				case "r":
 				{
 					name=stdin.next();
+					name=name.toLowerCase();
 					remove(name);
 
 				}
 					break;
-				case "q": break dance; //YEAH!
+				case "q": break loop; //YEAH!
 			}
 		System.out.print("Command: ");
 		selector=stdin.next();
@@ -56,6 +66,7 @@ public class entry{
 	} catch (Exception e) {
 		System.err.println(e);
 	}
+		autoremove();
 		System.out.println("Thanks for using this system!");
 	}
 
@@ -97,7 +108,7 @@ public class entry{
 		{
 			System.out.print(". Creating...");
 			entryList[n].name=name;
-			entryList[n].qnty+=qty;
+			entryList[n].qnty=qty;
 			entryList[n].notes=notes;
 			n++;
 			System.out.println("done");
@@ -107,17 +118,15 @@ public class entry{
 		return;
 	}
 
-	public static void WriteInventory(String FileName) /*Writes to the file*/throws Exception {
-   PrintStream P  = new PrintStream(FileName);
-		 			
-   for (int i=0; i < n; i++) {
-	P.println(entryList[i].name      + " " +
-	          entryList[i].qnty  + " " +
-		    entryList[i].notes);
-   }
-   P.close();
-   System.out.println("Inventory stored.");	
-}
+	public static void WriteInventory(String FileName) /*Writes to the file*/throws Exception
+	{
+		PrintStream P  = new PrintStream(FileName);
+		for (int i=0; i < n; i++) {
+			P.println(entryList[i].name+ " " +entryList[i].qnty  + " " +entryList[i].notes);
+		}
+		P.close();
+		System.out.println("Inventory stored.");	
+	}
 
 	public static int find(String to_Search)/* finds entry position*/
 	{
@@ -134,52 +143,59 @@ public class entry{
 			print(i);
 	}
 
-public static void print(int flamingo) /*prints single entries to stdout*/
-{
-	System.out.printf("%s: %d%n\t->%s%n",entryList[flamingo].name, entryList[flamingo].qnty,entryList[flamingo].notes);
-}
-
-public static void process (String line, int place) /*takes lines, pastes into class entry*/
-{
-	System.out.println(line);
-	try {
-	int where, where2;
-	where2=line.indexOf(" ");
-	entryList[place].name=line.substring(0, where2);
-	where=where2;
-	where2=line.indexOf(" ", where+1);
-	entryList[place].qnty=Integer.parseInt(line.substring(where+1, where2));
-	where=where2;
-	entryList[place].notes=line.substring(where+1);
-	} catch (NullPointerException e) {
-		System.out.println("?????\nGood job\n");
-	}
-}
-
-public static void instantiate() /*Just instantiates all the objects*/
-{
-  for (int i=0;i <200; ++i)
-  {
-    entryList[i]=new item();
-  }
-}
-
-public static void remove(String name) /*removes an object if it exists*/
-{
-	int pos=find(name);
-	if (pos !=-9) {
-		item temp=entryList[pos];
-		entryList[pos]=entryList[n-1];
-		entryList[n]=temp;
-		--n;
-	}
-	else System.out.println("Couldn't find item");
-}
-	public static void help()
+	public static void print(int index) /*prints single entries to stdout*/
 	{
-		System.out.println("e <item name>: enters item information. Updates the object if it already exists.");
-		System.out.rpintln("f <item name>: searches through the database, prints out the item and all associated information if it extists.");
-		System.out.println("l: lists all entries");
-		System.out.println("r <itemname>: removes item from the database if it exists");
+		if (index !=-9)
+		System.out.printf("%s: %d%n\t->%s%n",entryList[index].name, entryList[index].qnty,entryList[index].notes);
+		else System.out.println();
+	}
+
+	public static void process (String line, int place) /*takes lines, pastes into class entry*/
+	{
+		System.out.println(line);
+		try {
+		int where, where2;
+		where2=line.indexOf(" ");
+		entryList[place].name=line.substring(0, where2);
+		where=where2;
+		where2=line.indexOf(" ", where+1);
+		entryList[place].qnty=Integer.parseInt(line.substring(where+1, where2));
+		where=where2;
+		entryList[place].notes=line.substring(where+1);
+		} catch (NullPointerException e) {
+			System.err.print(e);
+		}
+	}
+
+	public static void instantiate() /*Just instantiates all the objects*/
+	{
+		for (int i=0;i <200; ++i)
+		{
+			entryList[i]=new item();
+		}
+	}
+
+	public static void remove(String name) /*removes an object if it exists*/
+	{
+		int pos=find(name);
+		if (pos !=-9) {
+			item temp=entryList[pos];
+			entryList[pos]=entryList[n-1];
+			entryList[n-1]=temp;
+			--n;
+		}
+		else System.out.println("Couldn't find item");
+	}
+	public static void autoremove() /*Any entry that has 0 items gets purged*/{
+		for (int i=0; i < n; ++i)
+		{
+			if (entryList[i].qnty==0)
+			{
+				item temp=entryList[i];
+				entryList[i]=entryList[n-1];
+				entryList[n-1]=temp;
+				--n;
+			}
+		}
 	}
 }
